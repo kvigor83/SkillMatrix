@@ -1,0 +1,207 @@
+* {
+	margin:0;
+	padding:0;
+}
+
+body{
+	font: normal 16px Arial, Helvetica, sans-serif;
+}
+
+h1, h3{
+	font: normal 24px 'Open Sans', Arial, Helvetica, sans-serif;
+
+}
+
+
+/*-----------------
+	The Header
+------------------*/
+
+header {
+	position: fixed;
+	top: 0;
+	left:0;
+	right:0;
+
+	height: 40px;
+	z-index: 100;
+
+	background-color: #282b2c;
+	padding: 20px 40px;
+	color: #fff;
+	box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.1);
+}
+
+.button-header {
+	background-color: #5a75db;
+	border: none;
+	color: white;
+	padding: 5px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 19px;
+	cursor: pointer;
+	margin: 4px 2px;
+	border-radius: 4px;
+	float: right;
+	opacity:0.9;
+}
+
+header a{
+	font: normal 24px 'Open Sans', Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	display: inline-block;
+	color: #fff;
+
+}
+
+
+@media (max-width: 500px){
+
+	header {
+		padding: 20px 15px;
+	}
+
+	header h1{
+		font-size: 24px;
+		margin: 0;
+	}
+
+}
+
+/*-----------------
+	Main Content
+------------------*/
+#myInput{
+	width: 50%;
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	resize: vertical;
+	font-size: 16px;}
+
+.main-content{
+
+	box-sizing: border-box;
+	/*text-align: center;*/
+	text-align: left;
+	margin: 125px auto 60px;
+	padding: 0 40px;
+}
+
+.main-content h3{
+	font-size: 28px;
+	color:  #5a96b9;
+	padding-bottom: 20px;
+}
+
+@media (max-width: 600px){
+
+	.main-content{
+		margin: 45px auto;
+		padding: 0 25px;
+	}
+
+}
+
+
+/*---------------------------
+	Single Skill Page
+----------------------------*/
+
+.single-product{
+	z-index: 100;
+}
+
+.overlay{
+	height: 20px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #282b2c;
+	transition: 0.6s;
+	z-index: 100;
+}
+
+.single-product.visible .overlay{
+	height: 100%;
+}
+
+.preview-large{
+	box-sizing: border-box;
+	width: 760px;
+	height: 550px;
+	position: fixed;
+	left: 50%;
+	margin-left: -375px;
+	top: 50%;
+	margin-top: -275px;
+	pointer-events: none;
+
+	border-radius: 6px;
+	background-color:  #ffffff;
+
+	z-index: 102;
+	opacity: 0;
+	transition: 0.4s;
+
+}
+
+.single-product.visible .preview-large{
+	opacity: 1;
+	transition: 1.4s;
+	pointer-events: auto;
+}
+
+.preview-large h3{
+	margin-top: 20px;
+}
+
+.preview-large img{
+	width: 100%;
+	height: 280px;
+	border-bottom: 3px solid #efefef;
+	border-radius: 5px 5px 0 0;
+}
+
+.preview-large p{
+	line-height: 23px;
+	padding: 50px 45px;
+}
+
+.close{
+	position: absolute;
+	right: 25px;
+	top: 15px;
+
+	font-size: 28px;
+	color: #555;
+	cursor: pointer;
+}
+
+
+/*---------------------------
+	Error Page
+----------------------------*/
+
+.error{
+	opacity: 0;
+	transition: 0.6s;
+	pointer-events: none;
+	position: absolute;
+	left: 0;
+	top: 100px;
+	width: 100%;
+}
+
+.error.visible{
+	opacity: 1;
+}
+
+.error h3{
+	font-size: 40px;
+}
+

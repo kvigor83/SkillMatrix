@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN">
+    <Properties>
+        <Property name="basePath">d:\!Epam\OnlineTraining\logs\</Property>
+    </Properties>
+    <appenders>
+        <RollingFile name="FILE" fileName="${basePath}/training-info.log" filePattern="${basePath}/training-info - %d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{ISO8601} [%-5p] (%F:%L) - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%L) - %m%n"/>
+        </Console>
+        <!--<Console name="STDOUT1" target="SYSTEM_OUT">-->
+            <!--<PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%L) - %m%n&#45;&#45;&#45;&#45;&#45;&#45;"/>-->
+        <!--</Console>-->
+    </appenders>
+    <Loggers>
+        <!--<Logger name= "task.by.kastsiuchenka.training" level="debug" additivity="false">-->
+            <!--<appender-ref ref="STDOUT"/>-->
+            <!--<appender-ref ref="FILE"/>-->
+        <!--</Logger>-->
+        <root level="debug">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </Loggers>
+
+</configuration>
