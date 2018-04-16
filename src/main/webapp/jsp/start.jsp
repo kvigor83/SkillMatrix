@@ -29,14 +29,14 @@
         <input type="checkbox" id="menu"/>
         <label for="menu" id="nav-icon">&#9776; HARD SKILLS</label>
 
-
         <div class="multi-level" id="123">
             <script id="skills-template" type="x-handlebars-template">
                 {{#each this}}
                 <div class="item">
                     <input type="checkbox" id="{{id}}"/>
                     {{#if count-nested}}
-                    <img src="/skills/images/Arrow.png" class="arrow"><label for="{{id}}">{{name}}</label>
+                    <img src="/skills/images/Arrow.png" class="arrow">
+                    <label for="{{id}}">{{name}}</label>
                     <ul>
                         {{#each nested1}}
                         <li>
@@ -101,7 +101,7 @@
         </div>
 
     </div>
-
+    <a id="delete" href="#">Delete</a>
     <div class="single-skill page">
 
         <div class="overlay"></div>
@@ -126,11 +126,74 @@
         <span class="close-modal" onclick="displayNone()">&times;</span>
         <p></p>
         <p>©2018 Demo project SkillMatrix Kastsiuchenka Ihar / Group HTP-9 Java</p><br><br>
-        <p> </p>
     </div>
 </div>
 
 <script>
+    $('#delete').click(function () {
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: '/deleteData',
+            data: "",
+            success: function (response) {
+                var html = "";
+                $.each(response.data, function (i) {
+                    html = html + response.data[i] + "<br/>";
+                });
+                $('#container').html(html);
+            }
+        });
+    });
+    $('#get').click(function () {
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: '/getData',
+            data: "",
+            success: function (response) {
+                var html = "";
+                $.each(response.data, function (i) {
+                    html = html + response.data[i] + "<br/>";
+                });
+                $('#container').html(html);
+            }
+        });
+    });
+    $('#put').click(function () {
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: '/updateData',
+            data: "",
+            success: function (response) {
+                var html = "";
+                $.each(response.data, function (i) {
+                    html = html + response.data[i] + "<br/>";
+                });
+                $('#container').html(html);
+            }
+        });
+    });
+
+    $('#post').click(function () {
+        if (!$("#data").val()) {
+            alert("Enter your data!");
+        } else {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: '/addNewData',
+                data: {
+                    'data': $("#data").val()
+                },
+                success: function (response) {
+                    $('#get').click();
+                }
+            });
+        }
+
+    });
     $(function () {
         $("#myInput").on("keyup", function () {
             var value = $(this).val().toLowerCase();

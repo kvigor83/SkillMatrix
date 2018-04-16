@@ -26,7 +26,12 @@ public class FrontController extends HttpServlet {
         CommandType commandType = RequestHandler.getCommand(req);
         Command command = commandType.getCommand();
         String page = command.execute(req, resp);
-        getServletContext().getRequestDispatcher("/jsp/start.jsp").forward(req, resp);
+        if (commandType.getPageName().equals("start")) {
+            getServletContext().getRequestDispatcher("/jsp/start.jsp").forward(req, resp);
+        }else{
+
+        }
+
 //
     }
 

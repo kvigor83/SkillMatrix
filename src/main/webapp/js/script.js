@@ -3,83 +3,30 @@ $(function () {
     // Globals variables
 
     // 	An array containing objects with information about the skills.
-    var products = [],
+    var skills = []
 
-        // Our filters object will contain an array of values for each filter
+    // These are called on page load
 
-        // Example:
-        // filters = {
-        // 		"manufacturer" = ["Apple","Sony"],
-        //		"storage" = [16]
-        //	}
-        filters = {};
+    // Get data about our skills from skills.json.
+    $.getJSON("skills.json", function (data) {
 
+        // Write the data into our global variable.
+        skills = data;
 
-    //	Event handlers for frontend navigation
+        // Call a function to create HTML for all the skills.
+        generateAllSkillsHTML(skills);
 
-    //	Checkbox filtering
-
-    var checkboxes = $('.all-skills input[type=checkbox]');
-
-    checkboxes.click(function () {
-
-        var that = $(this),
-            specName = that.attr('name');
-
-        // When a checkbox is checked we need to write that in the filters object;
-        if (that.is(":checked")) {
-
-            // If the filter for this specification isn't created yet - do it.
-            if (!(filters[specName] && filters[specName].length)) {
-                filters[specName] = [];
-            }
-
-            //	Push values into the chosen filter array
-            filters[specName].push(that.val());
-
-            // Change the url hash;
-            createQueryHash(filters);
-
-        }
-
-        // When a checkbox is unchecked we need to remove its value from the filters object.
-        if (!that.is(":checked")) {
-
-            if (filters[specName] && filters[specName].length && (filters[specName].indexOf(that.val()) != -1)) {
-
-                // Find the checkbox value in the corresponding array inside the filters object.
-                var index = filters[specName].indexOf(that.val());
-
-                // Remove it.
-                filters[specName].splice(index, 1);
-
-                // If it was the last remaining value for this specification,
-                // delete the whole array.
-                if (!filters[specName].length) {
-                    delete filters[specName];
-                }
-
-            }
-
-            // Change the url hash;
-            createQueryHash(filters);
-        }
+        // Manually trigger a hashchange to start the app.
+        $(window).trigger('hashchange');
     });
 
-    // When the "Clear all filters" button is pressed change the hash to '#' (go to the home page)
-    $('.filters button').click(function (e) {
-        e.preventDefault();
-        window.location.hash = '#';
-    });
+    // Single skill page buttons
 
+    var singleSkillPage = $('.single-skill');
 
-    // Single product page buttons
+    singleSkillPage.on('click', function (e) {
 
-    var singleProductPage = $('.single-product');
-
-    singleProductPage.on('click', function (e) {
-
-        if (singleProductPage.hasClass('visible')) {
+        if (singleSkillPage.hasClass('visible')) {
 
             var clicked = $(e.target);
 
@@ -92,23 +39,6 @@ $(function () {
         }
 
     });
-
-
-    // These are called on page load
-
-    // Get data about our products from products.json.
-    $.getJSON("skills.json", function (data) {
-
-        // Write the data into our global variable.
-        products = data;
-
-        // Call a function to create HTML for all the products.
-        generateAllProductsHTML(products);
-
-        // Manually trigger a hashchange to start the app.
-        $(window).trigger('hashchange');
-    });
-
 
     // An event handler with calls the render function on every hashchange.
     // The render function will show the appropriate content of out page.
@@ -133,23 +63,23 @@ $(function () {
             // The "Homepage".
             '': function () {
 
-                // Clear the filters object, uncheck all checkboxes, show all the products
+                // Clear the filters object, uncheck all checkboxes, show all the skills
                 filters = {};
                 checkboxes.prop('checked', false);
 
-                renderProductsPage(products);
+                renderSkillPage(skills);
             },
 
-            // Single Products page.
+            // Single Skills page.
             '#product': function () {
 
-                // Get the index of which product we want to show and call the appropriate function.
+                // Get the index of which skill we want to show and call the appropriate function.
                 var index = url.split('#product/')[1].trim();
 
-                renderSingleProductPage(index, products);
+                renderSingleSkillPage(index, skills);
             },
 
-            // Page with filtered products
+            // Page with filtered skills
             '#filter': function () {
 
                 // Grab the string after the '#filter/' keyword. Call the filtering function.
@@ -165,7 +95,7 @@ $(function () {
                     return;
                 }
 
-                renderFilterResults(filters, products);
+                renderFilterResults(filters, skills);
             }
 
         };
@@ -181,11 +111,10 @@ $(function () {
 
     }
 
-
     // This function is called only once - on page load.
-    // It fills up the products list via a handlebars template.
+    // It fills up the skills list via a handlebars template.
     // It recieves one parameter - the data we took from skills.json.
-    function generateAllProductsHTML(data) {
+    function generateAllSkillsHTML(data) {
 
         // var list = $('.all-skills .skills-list');
         var list = $(".multi-level");
@@ -194,61 +123,20 @@ $(function () {
         var theTemplate = Handlebars.compile(theTemplateScript);
         list.append(theTemplate(data));
 
-
-        // Each products has a data-index attribute.
-        // On click change the url hash to open up a preview for this product only.
-        // Remember: every hashchange triggers the render function.
-
-        // list.find('li').on('click', function (e) {
-        //     e.preventDefault();
-        //
-        //     var productIndex = $(this).data('index');
-        //
-        //     window.location.hash = 'product/' + productIndex;
-        // })
     }
 
-    // This function receives an object containing all the product we want to show.
-    function renderProductsPage(data) {
+    // Opens up a preview for one of the skills.
+    // Its parameters are an index from the hash and the skills object.
+    function renderSingleSkillPage(index, data) {
 
-        var page = $('.all-skills'),
-            allProducts = $('.all-skills .skills-list > li');
-
-        // Hide all the products in the products list.
-        allProducts.addClass('hidden');
-
-        // Iterate over all of the products.
-        // If their ID is somewhere in the data object remove the hidden class to reveal them.
-        allProducts.each(function () {
-
-            var that = $(this);
-
-            data.forEach(function (item) {
-                if (that.data('index') == item.id) {
-                    that.removeClass('hidden');
-                }
-            });
-        });
-
-        // Show the page itself.
-        // (the render function hides all pages so we need to show the one we want).
-        page.addClass('visible');
-
-    }
-
-
-    // Opens up a preview for one of the products.
-    // Its parameters are an index from the hash and the products object.
-    function renderSingleProductPage(index, data) {
-
-        var page = $('.single-product'),
+        var page = $('.single-skill'),
             container = $('.preview-large');
 
-        // Find the wanted product by iterating the data object and searching for the chosen index.
+        // Find the wanted skill by iterating the data object and searching for the chosen index.
         if (data.length) {
             data.forEach(function (item) {
                 if (item.id == index) {
-                    // Populate '.preview-large' with the chosen product's data.
+                    // Populate '.preview-large' with the chosen skill's data.
                     container.find('h3').text(item.name);
                     container.find('img').attr('src', item.image.large);
                     container.find('p').text(item.description);
@@ -261,79 +149,6 @@ $(function () {
 
     }
 
-    // Find and render the filtered data results. Arguments are:
-    // filters - our global variable - the object with arrays about what we are searching for.
-    // products - an object with the full products list (from product.json).
-    function renderFilterResults(filters, products) {
-
-        // This array contains all the possible filter criteria.
-        var criteria = ['manufacturer', 'storage', 'os', 'camera'],
-            results = [],
-            isFiltered = false;
-
-        // Uncheck all the checkboxes.
-        // We will be checking them again one by one.
-        checkboxes.prop('checked', false);
-
-
-        criteria.forEach(function (c) {
-
-            // Check if each of the possible filter criteria is actually in the filters object.
-            if (filters[c] && filters[c].length) {
-
-
-                // After we've filtered the products once, we want to keep filtering them.
-                // That's why we make the object we search in (products) to equal the one with the results.
-                // Then the results array is cleared, so it can be filled with the newly filtered data.
-                if (isFiltered) {
-                    products = results;
-                    results = [];
-                }
-
-
-                // In these nested 'for loops' we will iterate over the filters and the products
-                // and check if they contain the same values (the ones we are filtering by).
-
-                // Iterate over the entries inside filters.criteria (remember each criteria contains an array).
-                filters[c].forEach(function (filter) {
-
-                    // Iterate over the products.
-                    products.forEach(function (item) {
-
-                        // If the product has the same specification value as the one in the filter
-                        // push it inside the results array and mark the isFiltered flag true.
-
-                        if (typeof item.specs[c] == 'number') {
-                            if (item.specs[c] == filter) {
-                                results.push(item);
-                                isFiltered = true;
-                            }
-                        }
-
-                        if (typeof item.specs[c] == 'string') {
-                            if (item.specs[c].toLowerCase().indexOf(filter) != -1) {
-                                results.push(item);
-                                isFiltered = true;
-                            }
-                        }
-
-                    });
-
-                    // Here we can make the checkboxes representing the filters true,
-                    // keeping the app up to date.
-                    if (c && filter) {
-                        $('input[name=' + c + '][value=' + filter + ']').prop('checked', true);
-                    }
-                });
-            }
-
-        });
-
-        // Call the renderProductsPage.
-        // As it's argument give the object with filtered products.
-        renderProductsPage(results);
-    }
-
 
     // Shows the error page.
     function renderErrorPage() {
@@ -341,19 +156,5 @@ $(function () {
         page.addClass('visible');
     }
 
-    // Get the filters object, turn it into a string and write it into the hash.
-    function createQueryHash(filters) {
-
-        // Here we check if filters isn't empty.
-        if (!$.isEmptyObject(filters)) {
-            // Stringify the object via JSON.stringify and write it after the '#filter' keyword.
-            window.location.hash = '#filter/' + JSON.stringify(filters);
-        }
-        else {
-            // If it's empty change the hash to '#' (the homepage).
-            window.location.hash = '#';
-        }
-
-    }
 
 });

@@ -9,7 +9,6 @@ body{
 
 h1, h3{
 	font: normal 24px 'Open Sans', Arial, Helvetica, sans-serif;
-
 }
 
 
@@ -33,7 +32,7 @@ header {
 }
 
 .button-header {
-	background-color: #5a75db;
+	background-color: #5895DB;
 	border: none;
 	color: white;
 	padding: 5px 32px;
@@ -52,6 +51,8 @@ header a{
 	font: normal 24px 'Open Sans', Arial, Helvetica, sans-serif;
 	text-transform: uppercase;
 	display: inline-block;
+	padding: 12px 18px;
+	border-radius: 3px;
 	color: #fff;
 
 }
@@ -74,7 +75,7 @@ header a{
 	Main Content
 ------------------*/
 #myInput{
-	width: 50%;
+	width: 100%;
 	padding: 12px;
 	border: 1px solid #ccc;
 	border-radius: 4px;

@@ -7,9 +7,9 @@ import by.kastsiuchenka.skillmatrix.web.command.impl.UpdateCommand;
 
 public enum CommandType {
     START("start", new StartCommand()),
-    DELETE_ITEM("about", new DeleteCommand()),
-    INSERT_ITEM("login",new InsertCommand()),
-    UPDATE_ITEM("registration",  new UpdateCommand());
+    DELETE_SKILL("deleteData", new DeleteCommand()),
+    INSERT_SKILL("addNewData",new InsertCommand()),
+    UPDATE_SKILL("updateData",  new UpdateCommand());
 
 
     private String pageName;
@@ -22,6 +22,10 @@ public enum CommandType {
 
     public Command getCommand() {
         return command;
+    }
+
+    public String getPageName() {
+        return pageName;
     }
 
     public static CommandType getByCommandName(String page) {
