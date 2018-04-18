@@ -1,6 +1,7 @@
 package by.kastsiuchenka.skillmatrix.service.impl;
 
 
+import by.kastsiuchenka.skillmatrix.action.SkillAction;
 import by.kastsiuchenka.skillmatrix.parser.XLSParser;
 import by.kastsiuchenka.skillmatrix.service.ServiceException;
 import by.kastsiuchenka.skillmatrix.service.SkillService;
@@ -21,17 +22,21 @@ public class SkillServiceImpl implements SkillService {
 
 
     @Override
-    public void update(long id) throws ServiceException {
+    public void update(String id,String data,String xlsFile) throws ServiceException {
 
+        SkillAction action = new SkillAction(id,data,xlsFile);
+        action.updateSkill();
     }
 
     @Override
-    public void create(long id) throws ServiceException {
-
+    public void create(String id,String data,String xlsFile) throws ServiceException {
+        SkillAction action = new SkillAction(id,data,xlsFile);
+        action.createSkill();
     }
 
     @Override
-    public void delete(long id) throws ServiceException {
-
+    public void delete(String id,String xlsFile) throws ServiceException {
+        SkillAction action = new SkillAction(id,xlsFile);
+        action.deleteSkill();
     }
 }

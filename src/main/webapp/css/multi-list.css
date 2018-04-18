@@ -27,6 +27,14 @@ html, body {
     z-index: 0;
     margin: 13px 1em 0 2em;
 }
+.shester {
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    float: right;
+    z-index: 10;
+    margin: 13px 1em 0 2em;
+}
 .item input + .arrow {
     transform: rotate(-90deg);
     transition: 0.1s;
@@ -38,9 +46,13 @@ html, body {
 
 /*Styles*/
 
-label:hover {
+/*label:hover {*/
+    /*cursor: pointer;*/
+/*}*/
+shester:hover {
     cursor: pointer;
 }
+
 label {
     width: 100%;
     display: block;
@@ -48,7 +60,7 @@ label {
     position: relative;
 }
 .nav {
-    width: 50%;
+    width: 70%;
     background-color: white;
     overflow-x: hidden;
     border-bottom: 1px solid #CFD8DC;

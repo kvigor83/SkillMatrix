@@ -13,17 +13,7 @@ public class RequestHandler {
             param = "start";
         }
         CommandType type = CommandType.getByCommandName(param);
-//        HttpSession session = req.getSession();
-//        String pageName = (String) session.getAttribute("pageName");
-//        if (pageName != null) {
-//            session.setAttribute("prevPage", pageName);
-//            session.setAttribute("pageName", type.getPageName());
-//            session.setAttribute("pagePath", type.getPagePath());
-//        } else {
-//            session.setAttribute("prevPage", type.getPageName());
-//            session.setAttribute("pageName", CommandType.HOME.getPageName());
-//            session.setAttribute("pagePath", CommandType.HOME.getPagePath());
-//        }
+
         return type;
     }
 }

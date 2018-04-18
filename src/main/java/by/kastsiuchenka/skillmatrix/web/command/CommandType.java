@@ -7,9 +7,9 @@ import by.kastsiuchenka.skillmatrix.web.command.impl.UpdateCommand;
 
 public enum CommandType {
     START("start", new StartCommand()),
-    DELETE_SKILL("deleteData", new DeleteCommand()),
-    INSERT_SKILL("addNewData",new InsertCommand()),
-    UPDATE_SKILL("updateData",  new UpdateCommand());
+    DELETE_DATA("deleteData", new DeleteCommand()),
+    INSERT_DATA("addNewData", new InsertCommand()),
+    UPDATE_DATA("updateData", new UpdateCommand());
 
 
     private String pageName;

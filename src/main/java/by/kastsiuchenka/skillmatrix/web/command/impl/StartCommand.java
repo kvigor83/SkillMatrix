@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class StartCommand implements Command {
     private static Logger Logger = LogManager.getLogger(StartCommand.class);
-    private static final String SOURCE_XLSX_FILE = "SkillMatrix.xlsx";
-    private static final String OUTPUT_JSON_FILE = "skills.json";
     private SkillService skillService = SkillServiceImpl.getInstance();
 
 

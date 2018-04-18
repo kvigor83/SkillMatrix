@@ -29,92 +29,11 @@
         <input type="checkbox" id="menu"/>
         <label for="menu" id="nav-icon">&#9776; HARD SKILLS</label>
 
-        <div class="multi-level" id="123">
-            <script id="skills-template" type="x-handlebars-template">
-                {{#each this}}
-                <div class="item">
-                    <input type="checkbox" id="{{id}}"/>
-                    {{#if count-nested}}
-                    <img src="/skills/images/Arrow.png" class="arrow">
-                    <label for="{{id}}">{{name}}</label>
-                    <ul>
-                        {{#each nested1}}
-                        <li>
-                            <div class="sub-item">
-                                <input type="checkbox" id="{{n1-id}}"/>
-                                {{#if count-nested}}
-                                <img src="/skills/images/Arrow.png" class="arrow"><label
-                                    for="{{n1-id}}">{{name}}</label>
-                                <ul>
-                                    {{#each nested2}}
-                                    <li>
-                                        <div class="sub-item">
-                                            <input type="checkbox" id="{{n2-id}}"/>
-                                            {{#if count-nested}}
-                                            <img src="/skills/images/Arrow.png" class="arrow"><label
-                                                for="{{n2-id}}">{{name}}</label>
-                                            <ul>
-                                                {{#each nested3}}
-                                                <li>
-                                                    <div class="sub-item">
-                                                        <input type="checkbox" id="{{n3-id}}"/>
-                                                        {{#if count-nested}}
-                                                        <img src="/skills/images/Arrow.png" class="arrow"><label
-                                                            for="{{n3-id}}">{{name}}</label>
-                                                        <ul>
-                                                            {{#each nested4}}
-                                                            <li>
-                                                                <div class="sub-item">
-                                                                    <input type="checkbox" id="{{n4-id}}"/>
-                                                                    <label for="{{n4-id}}">- {{name}}</label>
-                                                                </div>
-                                                            </li>
-                                                            {{/each}}
-                                                        </ul>
-                                                        {{else}}
-                                                        <label for="{{n2-id}}">- {{name}}</label>
-                                                        {{/if}}
-                                                    </div>
-                                                </li>
-                                                {{/each}}
-                                            </ul>
-                                            {{else}}
-                                            <label for="{{n2-id}}">- {{name}}</label>
-                                            {{/if}}
-                                        </div>
-                                    </li>
-                                    {{/each}}
-                                </ul>
-                                {{else}}
-                                <label for="{{n1-id}}">- {{name}}</label>
-                                {{/if}}
-                            </div>
-                        </li>
-                        {{/each}}
-                    </ul>
-                    {{else}}
-                    <label for="{{id}}">- {{name}}</label>
-                    {{/if}}
-                </div>
-                {{/each}}
-            </script>
+        <div class="multi-level" id="multi-tree">
         </div>
 
     </div>
-    <a id="delete" href="#">Delete</a>
-    <div class="single-skill page">
 
-        <div class="overlay"></div>
-
-        <div class="preview-large">
-            <h3>Single skill view</h3>
-            <%--<img src=""/>--%>
-            <p></p>
-
-            <span class="close">×</span>
-        </div>
-
-    </div>
 
     <div class="error page">
         <h3>Sorry, something went wrong :(</h3>
@@ -129,87 +48,134 @@
     </div>
 </div>
 
+<input type="text" id="adr"/>
+<input type="text" id="data"/>
+<%--<a id="delete" href="#">Delete</a>--%>
+<%--<a id="update" href="#">Update data</a>--%>
+<a id="update" href="#">UPDATE</a>
+<div id="container"></div>
+
+</body>
+<script id="skills-template" type="x-handlebars-template">
+    {{#each this}}
+    <div class="item">
+        <input type="checkbox" id="{{id}}"/>
+        <img src="/skills/images/shester.png" class="shester">
+        {{#if count-nested}}
+        <img src="/skills/images/Arrow.png" class="arrow">
+        <label for="{{id}}">{{name}}</label>
+        <ul>
+            {{#each nested1}}
+            <li>
+                <div class="sub-item">
+                    <input type="checkbox" id="{{n1-id}}"/>
+                    <img src="/skills/images/shester.png" class="shester">
+                    {{#if count-nested}}
+                    <img src="/skills/images/Arrow.png" class="arrow"><label
+                        for="{{n1-id}}">{{name}}</label>
+                    <ul>
+                        {{#each nested2}}
+                        <li>
+                            <div class="sub-item">
+                                <input type="checkbox" id="{{n2-id}}"/>
+                                <img src="/skills/images/shester.png" class="shester">
+                                {{#if count-nested}}
+                                <img src="/skills/images/Arrow.png" class="arrow"><label
+                                    for="{{n2-id}}">{{name}}</label>
+                                <ul>
+                                    {{#each nested3}}
+                                    <li>
+                                        <div class="sub-item">
+                                            <input type="checkbox" id="{{n3-id}}"/>
+                                            <img src="/skills/images/shester.png" class="shester">
+                                            {{#if count-nested}}
+                                            <img src="/skills/images/Arrow.png" class="arrow"><label
+                                                for="{{n3-id}}">{{name}}</label>
+                                            <ul>
+                                                {{#each nested4}}
+                                                <li>
+                                                    <div class="sub-item">
+                                                        <input type="checkbox" id="{{n4-id}}"/>
+                                                        <label for="{{n4-id}}">- {{name}}</label>
+                                                    </div>
+                                                </li>
+                                                {{/each}}
+                                            </ul>
+                                            {{else}}
+                                            <label for="{{n2-id}}">- {{name}}</label>
+                                            {{/if}}
+                                        </div>
+                                    </li>
+                                    {{/each}}
+                                </ul>
+                                {{else}}
+                                <label for="{{n2-id}}">- {{name}}</label>
+                                {{/if}}
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    {{else}}
+                    <label for="{{n1-id}}">- {{name}}</label>
+                    {{/if}}
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <label for="{{id}}">- {{name}}</label>
+        {{/if}}
+    </div>
+    {{/each}}
+</script>
 <script>
-    $('#delete').click(function () {
+    $('#update').click(function () {
         $.ajax({
             type: "GET",
             cache: false,
-            url: '/deleteData',
-            data: "",
+            url: 'frontController',
+            data: {
+                'command':'updateData',
+                'id': $("#adr").val(),
+                'value': $("#data").val()
+            },
             success: function (response) {
-                var html = "";
-                $.each(response.data, function (i) {
-                    html = html + response.data[i] + "<br/>";
+                $('#container').html(response);
+                $.getJSON("skills.json", function (data) {
+                    generateAllSkillsHTML(data);
                 });
-                $('#container').html(html);
-            }
-        });
-    });
-    $('#get').click(function () {
-        $.ajax({
-            type: "GET",
-            cache: false,
-            url: '/getData',
-            data: "",
-            success: function (response) {
-                var html = "";
-                $.each(response.data, function (i) {
-                    html = html + response.data[i] + "<br/>";
-                });
-                $('#container').html(html);
-            }
-        });
-    });
-    $('#put').click(function () {
-        $.ajax({
-            type: "GET",
-            cache: false,
-            url: '/updateData',
-            data: "",
-            success: function (response) {
-                var html = "";
-                $.each(response.data, function (i) {
-                    html = html + response.data[i] + "<br/>";
-                });
-                $('#container').html(html);
+            },
+            error: function ()//Если запрос не удачен
+            {
+                $('#container').html("Запрос не удался!");
             }
         });
     });
 
-    $('#post').click(function () {
-        if (!$("#data").val()) {
-            alert("Enter your data!");
-        } else {
-            $.ajax({
-                type: "POST",
-                cache: false,
-                url: '/addNewData',
-                data: {
-                    'data': $("#data").val()
-                },
-                success: function (response) {
-                    $('#get').click();
-                }
-            });
-        }
+    function generateAllSkillsHTML(data) {
 
-    });
+        var list = $(".multi-level");
+//        document.getElementById('elem').onclick = function() {
+//            this.innerHTML = '';
+//        }
+        var theTemplateScript = $('#skills-template').html();
+        var theTemplate = Handlebars.compile(theTemplateScript);
+        document.getElementById('multi-tree').innerHTML='';
+        list.append(theTemplate(data));
+
+    }
+
     $(function () {
         $("#myInput").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("#123 label").filter(function () {
+            $("#multi-tree label,img").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
 
         });
     });
 </script>
-
 <script src="/skills/js/jquery-3.3.1.min.js" type="text/javascript"></script>
 <script src="/skills/js/handlebars-v4.0.11.js" type="text/javascript"></script>
 <script src="/skills/js/script.js" type="text/javascript"></script>
-
-
-
-</body>
 </html>
