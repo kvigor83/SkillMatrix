@@ -17,8 +17,11 @@ public class UpdateCommand implements Command {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         try {
+            System.out.println(req.getParameter("adr"));
+            System.out.println(req.getParameter("data"));
             skillService.update(req.getParameter("adr"),req.getParameter("data"), SOURCE_XLSX_FILE);
-
+            String outputJSONPath = req.getServletContext().getRealPath("/")+OUTPUT_JSON_FILE;
+            skillService.createJSON(SOURCE_XLSX_FILE, outputJSONPath);
 
         } catch (ServiceException e) {
             Logger.info(e.getMessage(), e);

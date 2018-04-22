@@ -24,7 +24,7 @@ public class StartCommand implements Command {
             skillService.createJSON(SOURCE_XLSX_FILE, outputJSONPath);
         } catch (ServiceException e) {
             Logger.info(e.getMessage(), e);
-            req.getSession().setAttribute("errorMsg",e);
+//            req.getSession().setAttribute("errorMsg",e);
         }
 
         return null;

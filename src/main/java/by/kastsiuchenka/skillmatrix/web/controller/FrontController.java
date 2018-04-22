@@ -26,7 +26,7 @@ public class FrontController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CommandType commandType = RequestHandler.getCommand(req);
         Command command = commandType.getCommand();
-        String str = command.execute(req, resp);
+        command.execute(req, resp);
         if (commandType.getPageName().equals("start")) {
             getServletContext().getRequestDispatcher("/jsp/start.jsp").forward(req, resp);
         }
@@ -35,7 +35,9 @@ public class FrontController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        CommandType commandType = CommandType.getByCommandName("updateData");
+        Command command = commandType.getCommand();
+        command.execute(req, resp);
     }
 
 }

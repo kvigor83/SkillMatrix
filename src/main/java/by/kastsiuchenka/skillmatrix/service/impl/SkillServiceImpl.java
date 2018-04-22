@@ -24,19 +24,19 @@ public class SkillServiceImpl implements SkillService {
     @Override
     public void update(String id,String data,String xlsFile) throws ServiceException {
 
-        SkillAction action = new SkillAction(id,data,xlsFile);
-        action.updateSkill();
+        SkillAction action = new SkillAction();
+        action.updateSkill(id,data,xlsFile);
     }
 
     @Override
     public void create(String id,String data,String xlsFile) throws ServiceException {
-        SkillAction action = new SkillAction(id,data,xlsFile);
-        action.createSkill();
+        SkillAction action = new SkillAction();
+        action.createSkill(id,data,xlsFile);
     }
 
     @Override
     public void delete(String id,String xlsFile) throws ServiceException {
-        SkillAction action = new SkillAction(id,xlsFile);
-        action.deleteSkill();
+        SkillAction action = new SkillAction();
+        action.deleteSkill(id,xlsFile);
     }
 }

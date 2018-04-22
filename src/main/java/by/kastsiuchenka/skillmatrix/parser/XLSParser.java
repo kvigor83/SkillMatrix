@@ -117,8 +117,6 @@ public class XLSParser {
                                     "\"n4-id\":\"" + cell.getAddress() + "\"");
                         }
                     }
-
-
                     writer.flush();
                 }
             }

@@ -28,9 +28,11 @@
         <input class="form-control" id="myInput" type="text" placeholder="Search..">
         <input type="checkbox" id="menu"/>
         <label for="menu" id="nav-icon">&#9776; HARD SKILLS</label>
-
         <div class="multi-level" id="multi-tree">
         </div>
+
+        <input type="checkbox" id="menu1"/>
+        <label for="menu1" id="nav-icon">&#9776; SOFT SKILLS</label>
 
     </div>
 
@@ -48,60 +50,68 @@
     </div>
 </div>
 
-<input type="text" id="adr"/>
 <input type="text" id="data"/>
 <%--<a id="delete" href="#">Delete</a>--%>
 <%--<a id="update" href="#">Update data</a>--%>
-<a id="update" href="#">UPDATE</a>
+<%--<a id="update" href="#">UPDATE</a>--%>
 <div id="container"></div>
 
 </body>
 <script id="skills-template" type="x-handlebars-template">
     {{#each this}}
-    <div class="item">
+    <div class="item" id="123">
         <input type="checkbox" id="{{id}}"/>
-        <img src="/skills/images/shester.png" class="shester">
         {{#if count-nested}}
         <img src="/skills/images/Arrow.png" class="arrow">
+        <img src="/skills/images/edit.png" class="edit">
+        <img src="/skills/images/add.png" class="add">
         <label for="{{id}}">{{name}}</label>
         <ul>
             {{#each nested1}}
             <li>
                 <div class="sub-item">
                     <input type="checkbox" id="{{n1-id}}"/>
-                    <img src="/skills/images/shester.png" class="shester">
                     {{#if count-nested}}
-                    <img src="/skills/images/Arrow.png" class="arrow"><label
-                        for="{{n1-id}}">{{name}}</label>
+                    <img src="/skills/images/Arrow.png" class="arrow">
+                    <img src="/skills/images/edit.png" class="edit">
+                    <img src="/skills/images/add.png" class="add">
+                    <label for="{{n1-id}}">{{name}}</label>
                     <ul>
                         {{#each nested2}}
                         <li>
                             <div class="sub-item">
                                 <input type="checkbox" id="{{n2-id}}"/>
-                                <img src="/skills/images/shester.png" class="shester">
                                 {{#if count-nested}}
-                                <img src="/skills/images/Arrow.png" class="arrow"><label
-                                    for="{{n2-id}}">{{name}}</label>
+                                <img src="/skills/images/Arrow.png" class="arrow">
+                                <img src="/skills/images/edit.png" class="edit">
+                                <img src="/skills/images/add.png" class="add">
+                                <label for="{{n2-id}}">{{name}}</label>
                                 <ul>
                                     {{#each nested3}}
                                     <li>
                                         <div class="sub-item">
                                             <input type="checkbox" id="{{n3-id}}"/>
-                                            <img src="/skills/images/shester.png" class="shester">
                                             {{#if count-nested}}
-                                            <img src="/skills/images/Arrow.png" class="arrow"><label
-                                                for="{{n3-id}}">{{name}}</label>
+                                            <img src="/skills/images/Arrow.png" class="arrow">
+                                            <img src="/skills/images/edit.png" class="edit">
+                                            <img src="/skills/images/add.png" class="add">
+                                            <label for="{{n3-id}}">{{name}}</label>
                                             <ul>
                                                 {{#each nested4}}
                                                 <li>
                                                     <div class="sub-item">
                                                         <input type="checkbox" id="{{n4-id}}"/>
+                                                        <img src="/skills/images/edit.png" class="edit">
+                                                        <img src="/skills/images/delete.png" class="delete">
                                                         <label for="{{n4-id}}">- {{name}}</label>
                                                     </div>
                                                 </li>
                                                 {{/each}}
                                             </ul>
                                             {{else}}
+                                            <img src="/skills/images/edit.png" class="edit">
+                                            <img src="/skills/images/delete.png" class="delete">
+                                            <img src="/skills/images/add.png" class="add">
                                             <label for="{{n2-id}}">- {{name}}</label>
                                             {{/if}}
                                         </div>
@@ -109,6 +119,9 @@
                                     {{/each}}
                                 </ul>
                                 {{else}}
+                                <img src="/skills/images/edit.png" class="edit">
+                                <img src="/skills/images/delete.png" class="delete">
+                                <img src="/skills/images/add.png" class="add">
                                 <label for="{{n2-id}}">- {{name}}</label>
                                 {{/if}}
                             </div>
@@ -116,6 +129,9 @@
                         {{/each}}
                     </ul>
                     {{else}}
+                    <img src="/skills/images/edit.png" class="edit">
+                    <img src="/skills/images/delete.png" class="delete">
+                    <img src="/skills/images/add.png" class="add">
                     <label for="{{n1-id}}">- {{name}}</label>
                     {{/if}}
                 </div>
@@ -129,15 +145,19 @@
     {{/each}}
 </script>
 <script>
-    $('#update').click(function () {
+    //    $('#update').click(function () {
+    //$('img').bind('click', function(){
+    $('body').on('click', '.edit', function () {
+        var ids = $(this).siblings('input').attr('id');
+        alert(ids);
         $.ajax({
-            type: "GET",
+            type: "POST",
             cache: false,
             url: 'frontController',
             data: {
-                'command':'updateData',
-                'id': $("#adr").val(),
-                'value': $("#data").val()
+                'command': 'updateData',
+                'adr': ids,
+                'data': $("#data").val()
             },
             success: function (response) {
                 $('#container').html(response);
@@ -152,6 +172,8 @@
         });
     });
 
+    //});
+
     function generateAllSkillsHTML(data) {
 
         var list = $(".multi-level");
@@ -160,7 +182,7 @@
 //        }
         var theTemplateScript = $('#skills-template').html();
         var theTemplate = Handlebars.compile(theTemplateScript);
-        document.getElementById('multi-tree').innerHTML='';
+        document.getElementById('multi-tree').innerHTML = '';
         list.append(theTemplate(data));
 
     }

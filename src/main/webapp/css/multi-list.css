@@ -13,7 +13,8 @@ html, body {
 .item ul, .nav input[type="checkbox"] {
     display: none;
 }
-#menu:checked ~ .multi-level, .item input:checked ~ ul {
+/*#menu:checked ~ .multi-level, .item input:checked ~ ul {*/
+.item input:checked ~ ul {
     display: block;
 }
 
@@ -27,14 +28,15 @@ html, body {
     z-index: 0;
     margin: 13px 1em 0 2em;
 }
-.shester {
+.edit,.delete, .add {
     width: 12px;
     height: 12px;
     vertical-align: middle;
     float: right;
-    z-index: 10;
-    margin: 13px 1em 0 2em;
+    z-index: 6;
+    margin: 13px 1em 0 0;
 }
+
 .item input + .arrow {
     transform: rotate(-90deg);
     transition: 0.1s;
@@ -46,10 +48,10 @@ html, body {
 
 /*Styles*/
 
-/*label:hover {*/
-    /*cursor: pointer;*/
-/*}*/
-shester:hover {
+label:hover {
+    cursor: pointer;
+}
+edit:hover {
     cursor: pointer;
 }
 
@@ -60,7 +62,7 @@ label {
     position: relative;
 }
 .nav {
-    width: 70%;
+    width: 50%;
     background-color: white;
     overflow-x: hidden;
     border-bottom: 1px solid #CFD8DC;
@@ -82,17 +84,27 @@ label {
     text-decoration: none;
     color: #90A4AE;
     font-weight: 100;
-    width: 100%;
+    width: 95%;
 }
-.item ul {
-    padding: 0 0.25em;
-}
-.nav li a {
-    line-height: 50px;
+.multi-level label {
+    line-height: 40px;
     margin: 0;
-    padding: 0 4em;
+    padding: 0 2em;
     list-style: none;
     text-decoration: none;
     color: #90A4AE;
     font-weight: 100;
+    width: 80%;
 }
+.item ul {
+    padding: 0 0;
+}
+/*.nav li a {*/
+    /*line-height: 50px;*/
+    /*margin: 0;*/
+    /*padding: 0 4em;*/
+    /*list-style: none;*/
+    /*text-decoration: none;*/
+    /*color: #90A4AE;*/
+    /*font-weight: 100;*/
+/*}*/
