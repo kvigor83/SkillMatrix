@@ -31,49 +31,6 @@ $(function () {
     }
 
 
-    // Opens up a preview for one of the skills.
-    function renderSingleSkillPage(index, data) {
-
-        var page = $('.single-skill'),
-            container = $('.preview-large');
-
-        // Find the wanted skill by iterating the data object and searching for the chosen index.
-        if (data.length) {
-            data.forEach(function (item) {
-                if (item.id == index) {
-                    // Populate '.preview-large' with the chosen skill's data.
-                    container.find('h3').text(item.name);
-                    container.find('img').attr('src', item.image.large);
-                    container.find('p').text(item.description);
-                }
-            });
-        }
-        // Single skill page buttons
-
-        var singleSkillPage = $('.single-skill');
-
-        singleSkillPage.on('click', function (e) {
-
-            if (singleSkillPage.hasClass('visible')) {
-
-                var clicked = $(e.target);
-
-                // If the close button or the background are clicked go to the previous page.
-                if (clicked.hasClass('close') || clicked.hasClass('overlay')) {
-                    // Change the url hash with the last used filters.
-                    createQueryHash(filters);
-                }
-
-            }
-
-        });
-
-        // Show the page.
-        page.addClass('visible');
-
-    }
-
-
     // Shows the error page.
     function renderErrorPage() {
         var page = $('.error');

@@ -172,8 +172,6 @@
         });
     });
 
-    //});
-
     function generateAllSkillsHTML(data) {
 
         var list = $(".multi-level");
